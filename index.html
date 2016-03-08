@@ -16,13 +16,15 @@
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
-      var percentages = [
+      var abovePercentages = [
           ['Explorer', 'Use hours per Day'],
           ['E6',   5],
           ['E7',  20],
           ['E8',  75]
         ];
-        
+      var percentages = abovePercentages;
+      var count = 0;
+      
       function drawChart() {
         var data = google.visualization.arrayToDataTable(percentages);
         var options = {
@@ -32,14 +34,20 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
+    
       function changePercentages(){
-        percentages = [
-            ['Explorer', 'Use hours per Day'],
-            ['E6',  50],
-            ['E7',  40],
-            ['E8',  10]
-          ];
-         google.charts.setOnLoadCallback(drawChart);
+       if(count % 2 == 0){
+         percentages = abovePercentages;
+       }else{
+          percentages = [
+              ['Explorer', 'Use hours per Day'],
+              ['E6',  50],
+              ['E7',  40],
+              ['E8',  10]
+            ];
+        }
+        google.charts.setOnLoadCallback(drawChart);
+        count++;
       }
     </script>
 </html>
